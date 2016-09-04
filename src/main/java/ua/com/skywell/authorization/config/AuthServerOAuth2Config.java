@@ -75,15 +75,15 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .authorizationCodeServices(authorizationCodeServices())
-                .approvalStore(approvalStore())
+//                .authorizationCodeServices(authorizationCodeServices())
+//                .approvalStore(approvalStore())
                 .tokenStore(tokenStore())
-                .accessTokenConverter(accessTokenConverter())
-                .reuseRefreshTokens(true)
-                .tokenServices(tokenServices())
-                .userApprovalHandler(userApprovalHandler())
-                .authenticationManager(authenticationManager)
-                .setClientDetailsService(clientDetailsService());
+//                .accessTokenConverter(accessTokenConverter())
+//                .reuseRefreshTokens(true)
+//                .tokenServices(tokenServices())
+//                .userApprovalHandler(userApprovalHandler())
+//                .setClientDetailsService(clientDetailsService())
+                .authenticationManager(authenticationManager);
     }
 
     @Bean
@@ -91,58 +91,58 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
         return new JdbcTokenStore(dataSource());
     }
 
-    @Bean
-    public ApprovalStore approvalStore() {
-        return new JdbcApprovalStore(dataSource());
-    }
+//    @Bean
+//    public ApprovalStore approvalStore() {
+//        return new JdbcApprovalStore(dataSource());
+//    }
+//
+//    @Bean
+//    public AuthorizationCodeServices authorizationCodeServices() {
+//        return new JdbcAuthorizationCodeServices(dataSource());
+//    }
+//
+//    @Bean
+//    public AccessTokenConverter accessTokenConverter() {
+//        return new DefaultAccessTokenConverter();
+//    }
+//
+//    @Bean
+//    public ClientDetailsService clientDetailsService() {
+//        return new JdbcClientDetailsService(dataSource());
+//    }
+//
+//    @Bean
+//    public OAuth2RequestFactory requestFactory() {
+//        return new DefaultOAuth2RequestFactory(clientDetailsService());
+//    }
+//
+//    @Bean
+//    public AuthorizationServerTokenServices tokenServices() {
+//        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+//        defaultTokenServices.setTokenStore(tokenStore());
+//        defaultTokenServices.setClientDetailsService(clientDetailsService());
+//        defaultTokenServices.setAuthenticationManager(authenticationManager);
+//        defaultTokenServices.setAccessTokenValiditySeconds(60 * 60 * 12); // default 12 hours.
+//        defaultTokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 30); // default 30 days.
+//        defaultTokenServices.setReuseRefreshToken(true);
+//        defaultTokenServices.setSupportRefreshToken(true);
+//        return defaultTokenServices;
+//    }
+//
+//    @Bean
+//    public ApprovalStoreUserApprovalHandler userApprovalHandler() {
+//        ApprovalStoreUserApprovalHandler approvalStoreUserApprovalHandler = new ApprovalStoreUserApprovalHandler();
+//        approvalStoreUserApprovalHandler.setClientDetailsService(clientDetailsService());
+//        approvalStoreUserApprovalHandler.setApprovalStore(approvalStore());
+//        approvalStoreUserApprovalHandler.setRequestFactory(requestFactory());
+//        approvalStoreUserApprovalHandler.setApprovalExpiryInSeconds(-1);
+//        return approvalStoreUserApprovalHandler;
+//    }
 
     @Bean
-    public AuthorizationCodeServices authorizationCodeServices() {
-        return new JdbcAuthorizationCodeServices(dataSource());
-    }
-
-    @Bean
-    public AccessTokenConverter accessTokenConverter() {
-        return new DefaultAccessTokenConverter();
-    }
-
-    @Bean
-    public ClientDetailsService clientDetailsService() {
-        return new JdbcClientDetailsService(dataSource());
-    }
-
-    @Bean
-    public OAuth2RequestFactory requestFactory() {
-        return new DefaultOAuth2RequestFactory(clientDetailsService());
-    }
-
-    @Bean
-    public AuthorizationServerTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setClientDetailsService(clientDetailsService());
-        defaultTokenServices.setAuthenticationManager(authenticationManager);
-        defaultTokenServices.setAccessTokenValiditySeconds(60 * 60 * 12); // default 12 hours.
-        defaultTokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 30); // default 30 days.
-        defaultTokenServices.setReuseRefreshToken(true);
-        defaultTokenServices.setSupportRefreshToken(true);
-        return defaultTokenServices;
-    }
-
-    @Bean
-    public ApprovalStoreUserApprovalHandler userApprovalHandler() {
-        ApprovalStoreUserApprovalHandler approvalStoreUserApprovalHandler = new ApprovalStoreUserApprovalHandler();
-        approvalStoreUserApprovalHandler.setClientDetailsService(clientDetailsService());
-        approvalStoreUserApprovalHandler.setApprovalStore(approvalStore());
-        approvalStoreUserApprovalHandler.setRequestFactory(requestFactory());
-        approvalStoreUserApprovalHandler.setApprovalExpiryInSeconds(-1);
-        return approvalStoreUserApprovalHandler;
-    }
-
-    @Bean
-    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
+    public DataSourceInitializer dataSourceInitializer() {
         DataSourceInitializer initializer = new DataSourceInitializer();
-        initializer.setDataSource(dataSource);
+        initializer.setDataSource(dataSource());
         initializer.setDatabasePopulator(databasePopulator());
         return initializer;
     }
