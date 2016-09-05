@@ -34,7 +34,7 @@ create table if not exists oauth_access_token (
 create table if not exists oauth_refresh_token (
   token_id VARCHAR(255),
   token bytea,
-  authentication BIGINT
+  authentication bytea
 );
 
 create table if not exists oauth_code (
