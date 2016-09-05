@@ -9,6 +9,9 @@ public class FooDto implements Serializable{
     private long id;
     private String name;
 
+    public FooDto() {
+    }
+
     public FooDto(long id, String name) {
         this.id = id;
         this.name = name;
